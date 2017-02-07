@@ -4,10 +4,7 @@ class SQL extends Connect{
 
     private static $allquery = array();
     private static $DB_NAME = 'default';
-
-
-
-
+    
     private static function query($query, $func = 'select'){
         parent::_connect();
         try{
