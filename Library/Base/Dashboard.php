@@ -139,7 +139,6 @@ class Dashboard extends Template {
                     $('.dropdown-menu:not(.'+eventId+')').hide();
                     $('.dropdown-menu.'+eventId).toggle();
                 });
-                
                 $('.hiden_border').on('click', function(){ $(this).parent().parent().parent().parent().hide(); }); 
                 /*
                 $('.dropdown>.dropdown-sql').on('click', function(e){ $('.dropdown-menusql').toggle(0, hiden_info_block(e)); });
