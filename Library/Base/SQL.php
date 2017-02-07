@@ -26,9 +26,9 @@ class SQL extends Connect{
             $thisID = parent::$_con->lastInsertId();
 
             $timeforquery['end'] = microtime(true);
-            self::$allquery[] = '<b>Time:</b> <i>'.round(($timeforquery['end'] -  $timeforquery['start']), 3).
-                '</i> sec  <b >Adapter: </b>'.parent::$DB_ADAPTER.'<b> Database: </b>'
-                .self::$DB_NAME.' <b style="color: #0060dd;float: right; margin-right: 30%; ">'.$query.PHP_EOL.'</b>';
+            self::$allquery[] = '<b>Time:</b> [ <i>'.round(($timeforquery['end'] -  $timeforquery['start']), 3).
+                '</i> sec ]  <b >Adapter: </b>[ '.parent::$DB_ADAPTER.' ]<b> Database: </b> ['
+                .self::$DB_NAME.' ] <b> Query: &nbsp;</b> <i style="color: #0060dd;">'.$query.PHP_EOL.'</i>';
 
             if($func == 'select'){
                 return $result;
