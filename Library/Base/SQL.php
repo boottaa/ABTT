@@ -7,23 +7,28 @@ class SQL extends Connect{
 
 
 
-    private static function set_database($name, $adapter){
-        if(in_array($name, Info::get_db('DB_NAME', $adapter))){
-            self::$DB_NAME = $name;
-        }else{
-            $debug = debug_backtrace()[0];
-            echo "<p>Файл: ['{$debug['file']}'] строка['{$debug['line']}']</p> Ошибка в методе: set_adapter класса SQL \n";
-            exit();
-        }
-    }
+
     private static function query($query, $func = 'select'){
         parent::_connect();
         try{
+            $timeforquery = array();
+
             parent::$_con->query('SET NAMES utf8;'); //Заплатка можно убрать если в my.conf прописать
-            self::$allquery[] = $query.PHP_EOL;
+
+
+
+
+
             //echo '<p style="color: red;">'.$query.'</p><br />';
+            $timeforquery['start'] = microtime(true);
+
             $result = parent::$_con->query($query);
             $thisID = parent::$_con->lastInsertId();
+
+            $timeforquery['end'] = microtime(true);
+            self::$allquery[] = '<b>Time:</b> <i>'.round(($timeforquery['end'] -  $timeforquery['start']), 3).
+                '</i> sec  <b >Adapter: </b>'.parent::$DB_ADAPTER.'<b> Database: </b>'
+                .self::$DB_NAME.' <b style="color: #0060dd;float: right; margin-right: 30%; ">'.$query.PHP_EOL.'</b>';
 
             if($func == 'select'){
                 return $result;
@@ -41,24 +46,27 @@ class SQL extends Connect{
      * @param $adapter - указываем адаптер из Library/config.php[database]
      * @param $db_name - указываем название БД из файла Library/config.php[DB_NAME]
      * */
-    public static function set_adapter( $adapter = 'default', $db_name = 'default'){
+    public static function set_adapter($db_name = 'default', $adapter = 'default'){
         //Если имя соединения существует миняем , иначе выдаем ошибку
         if(!empty(Info::get_db('', $adapter))){
             parent::$DB_ADAPTER = $adapter;
             self::set_database($db_name, $adapter);
-
+            parent::$_ins = null;
         }else{
             $debug = debug_backtrace()[0];
             echo "<p>Файл: ['{$debug['file']}'] строка['{$debug['line']}']</p> Ошибка в методе: set_adapter класса SQL \n";
             exit();
         }
     }
-
-
-
-
-
-
+    private static function set_database($name, $adapter){
+        if(in_array($name, Info::get_db('DB_NAME', $adapter))){
+            self::$DB_NAME = $name;
+        }else{
+            $debug = debug_backtrace()[0];
+            echo "<p>Файл: ['{$debug['file']}'] строка['{$debug['line']}']</p> Ошибка в методе: set_adapter класса SQL \n";
+            exit();
+        }
+    }
 
     public static function select($table, $rows = array('*'), $where = ''){
         $table = parent::db_prifix().$table;

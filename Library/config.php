@@ -23,16 +23,19 @@ return [
             'DB_USER'   =>'root',
             //Пароль для подключения к mysql серверу
             'DB_PASS'   =>'1991',
+            'DB_PRIFIX' => '',
             //Указываем все бд на указанном сервере
             //которое будет использовать веб приложения
             'DB_NAME'   => [
                 'default',
+                'new_q'
             ],
         ],
         'test' => [
             'DB_SERV'   =>'localhost',
             'DB_USER'   =>'root',
             'DB_PASS'   =>'1991',
+            'DB_PRIFIX' => '',
             'DB_NAME'   => [
                 'users',
                 'fname',
@@ -46,6 +49,7 @@ return [
             'DB_SERV'   =>'10.31.83.5',
             'DB_USER'   =>'b.ahmedov',
             'DB_PASS'   =>'1',
+            'DB_PRIFIX' => '',
             'DB_NAME'   => [
 
                 'fabrikant_ftest',

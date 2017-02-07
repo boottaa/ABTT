@@ -50,7 +50,11 @@ class Dashboard extends Template {
 
         if(parent::$tmp != false && self::$view == true)
         {
-            $html_info = 'Затрачено мб: [ '.round(self::$info['using_ram_mb'], 3).' ] Пиковое значение мб: [ '.round(self::$info['memory_get_peak_usage'], 3).' ] Затрачено времени: [ '.round(self::$info['using_time'], 3).' ] микросекунд';
+            $html_info = '
+            Затрачено мб: <b class="using_ram_mb"">[ <span>'.round(self::$info['using_ram_mb'], 3).'</span> ]</b> 
+            Пиковое значение мб: <b class="memory_get_peak_usage">[ <span>'.round(self::$info['memory_get_peak_usage'], 3).'</span> ]</b> 
+            Затрачено времени: <b class="using_time">[ <span>'.round(self::$info['using_time'], 3).'</span> ]</b> секунд';
+
             if(count($getErrors) != 0)
             {
                 foreach ($getErrors as $error)
@@ -100,13 +104,13 @@ class Dashboard extends Template {
                 }
             </style>
             <nav class='navbar navbar-inverse navbar-fixed-bottom' style='z-index: 999999; border-radius: 0px;'>
-                <ul class='dropdown-menu files dashboard-addpanel'>
+                <ul class='dropdown-menu drop_files dashboard-addpanel'>
                     $get_included_files
                 </ul>
-                <ul class='dropdown-menu errors dashboard-addpanel'>
+                <ul class='dropdown-menu drop_errors dashboard-addpanel'>
                     $error_html
                 </ul>
-                <ul class='dropdown-menu sql dashboard-addpanel'>      
+                <ul class='dropdown-menu drop_sql dashboard-addpanel'>      
                    $query_html
                 </ul>
                 <div class='container-fluid'>
@@ -118,20 +122,20 @@ class Dashboard extends Template {
                     <ul class='nav navbar-nav navbar-right'>
                         <li><a class='hiden_border' href='#'>скрыть</a></li>
                         <li class='dropdown'>
-                          <a href='#' class='btn-dropdown' id='files'>Files <span class='caret'></span></a> 
+                          <a href='#' class='btn-dropdown' id='drop_files'>Files <span class='caret'></span></a> 
                         </li>
                         <li class='dropdown'>
-                          <a href='#' class='btn-dropdown' id='errors'>Errors <span class='caret'></span></a> 
+                          <a href='#' class='btn-dropdown' id='drop_errors'>Errors <span class='caret'></span></a> 
                         </li>
                         <li class='dropdown'>
-                          <a href='#' class='btn-dropdown' id='sql'>SQL <span class='caret'></span></a> 
+                          <a href='#' class='btn-dropdown' id='drop_sql'>SQL <span class='caret'></span></a> 
                         </li>
                         
                     </ul>
                 </div>
             </nav>
             <script>
-                
+                //Для добавления панели нужно создать ( dropdown-menu ) 
                 $('.btn-dropdown').on('click', function(){
                     var eventId = $(this).attr('id');
                     console.log('.dropdown-menu.'+eventId);
@@ -140,21 +144,31 @@ class Dashboard extends Template {
                     $('.dropdown-menu.'+eventId).toggle();
                 });
                 $('.hiden_border').on('click', function(){ $(this).parent().parent().parent().parent().hide(); }); 
-                /*
-                $('.dropdown>.dropdown-sql').on('click', function(e){ $('.dropdown-menusql').toggle(0, hiden_info_block(e)); });
-                $('.dropdown>.dropdown-errors').on('click', function(e){ $('.dropdown-menu-errors').toggle(0, hiden_info_block(e)); });
-                $('.dropdown>.dropdown-files').on('click', function(e){ $('.dropdown-menu-files').toggle(0, hiden_info_block(e)); });
                 
+                //#ffb266 - оранжевый // #f53c3c - Красный // #579554 - Зеленный 
                 
-                function hiden_info_block(e) {
-                    if($(e.target).hasClass('dropdown-sql')){
-                        $('.dropdown-menu-errors').hide();
-                    }else if($(e.target).hasClass('dropdown-errors')){
-                        $('.dropdown-menusql').hide();
-                    }else if(){
-                        
+                //if($('.using_ram_mb>span').text() <= 1){
+                addColor('using_ram_mb');
+                addColor('memory_get_peak_usage');
+                addColor('using_time', { min : 0.01, mid: 0.5, max: 1 });
+                
+                function addColor(className, time) {
+                     if(time == undefined){
+                        time = {
+                            min : 1,
+                            mid : 2,
+                            max : 3
+                        }
+                     }
+                    if($('.'+className+'>span' ).text() <= time.min){
+                        $('.'+className).css({'color': '#579554'});
+                    }else if($('.'+className+'>span' ).text() > time.min && $('.'+className+'>span').text() < time.mid ){
+                        $('.'+className ).css({'color': '#ffb266'});
+                    }else if($('.'+className+'>span' ).text() > time.max){
+                        $('.'+className ).css({'color': '#f53c3c'});
                     }
-                }*/
+                }
+                
             </script>
             ";
         }

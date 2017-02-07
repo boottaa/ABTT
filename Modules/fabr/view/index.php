@@ -10,7 +10,13 @@ use Library\Rights\RightsControll;
 
 
 echo '<pre>';
-
+print_r(Test::getproduct());
 print_r(RightsControll::get_rights(1, 1));
-//print_r(Test::getproduct());
+print_r(Test::getproduct());
+print_r(Test::getproduct());
+print_r(Test::getproduct());
+print_r(Test::getproduct());
+print_r(RightsControll::get_rights(1, 1));print_r(RightsControll::get_rights(1, 1));
+print_r(RightsControll::get_rights(1, 1));
+print_r(RightsControll::get_rights(1, 1));
 echo '</pre>';
