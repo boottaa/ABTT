@@ -12,7 +12,7 @@ namespace Library\Rights;
 
 class RightsControll {
     public static function get_rights($firm_id, $user_id){
-        \SQL::set_adapter('oborontorg', 'test_boom'); //fabrikant_ftest  //test_boom
+        \SQL::set_adapter('test_boom', 'oborontorg'); //fabrikant_ftest  //test_boom
 
         $res = \SQL::select('users', ['*'], "where firm_id = $firm_id AND id = $user_id")->fetchAll(\PDO::FETCH_ASSOC);
 
