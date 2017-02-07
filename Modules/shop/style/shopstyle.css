@@ -1,0 +1,22 @@
+.acart{
+
+}
+
+.panel-info{
+    height: 350px;
+    max-height: 500px;
+    position: relative;
+}
+.ashopimg{
+    width: auto;
+    height: 150px;
+}
+.btnashop{
+    width: 100%;
+   /* position: absolute;
+    bottom: 10px;
+    left: 20px; */
+}
+.ashopinfo{
+
+}

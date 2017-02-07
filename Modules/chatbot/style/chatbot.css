@@ -1,0 +1,34 @@
+.chatbot{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+
+}
+
+.chatbot .panel-default{
+    border-radius: 0px !important;
+    border-color: #337ab7 !important;
+    height: auto;
+    width: auto;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 135px;
+}
+
+.chatbot .chat-panel .panel-body{
+    position: relative;
+    max-height: 400px;
+    height: 100%;
+    /*margin-bottom: ;
+    */
+}
+
+/*
+@media all and (max-width: 960px) {
+    .class {
+        background: red;
+    }
+}*/
