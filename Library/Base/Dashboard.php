@@ -53,7 +53,7 @@ class Dashboard extends Template {
             $html_info = '
             Затрачено мб: <b class="using_ram_mb"">[ <span>'.round(self::$info['using_ram_mb'], 3).'</span> ]</b> 
             Пиковое значение мб: <b class="memory_get_peak_usage">[ <span>'.round(self::$info['memory_get_peak_usage'], 3).'</span> ]</b> 
-            Затрачено времени: <b class="using_time">[ <span>'.round(self::$info['using_time'], 3).'</span> ]</b> микросекунд';
+            Затрачено времени: <b class="using_time">[ <span>'.round(self::$info['using_time'], 3).'</span> ]</b> секунд';
 
             if(count($getErrors) != 0)
             {
