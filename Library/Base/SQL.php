@@ -14,11 +14,6 @@ class SQL extends Connect{
             $timeforquery = array();
 
             parent::$_con->query('SET NAMES utf8;'); //Заплатка можно убрать если в my.conf прописать
-
-
-
-
-
             //echo '<p style="color: red;">'.$query.'</p><br />';
             $timeforquery['start'] = microtime(true);
 
