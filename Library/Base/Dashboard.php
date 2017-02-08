@@ -65,13 +65,14 @@ class Dashboard extends Template {
                 $error_html .= "<li>Ошибок нет<hr /></li>";
             }
 
-            if(count(self::$info['get_included_files'] != 0)){
+            if(count(self::$info['get_included_files'] != 0))
+            {
                 foreach (self::$info['get_included_files'] as $get_included_file)
                 {
-                    $get_included_files .= "<li>{$get_included_file}<hr /></li>";
+                    $get_included_files .= "<li style='border-bottom: solid 1px #ededed;'><a style='cursor: pointer;'>{$get_included_file}</a></li>";
                 }
             }else{
-                $get_included_files .= "<li>Запросов в бд нет<hr /></li>";
+                $get_included_files .= "<li>Нет подключенных файлов<hr /></li>";
             }
 
             if(count($query) != 0)
