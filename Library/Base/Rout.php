@@ -34,10 +34,11 @@ class Rout extends Info {
         if(self::getUri('1')->only() == ''){
             $file = $root_dir."/Modules/index/config.php";
         }elseif(self::getUri('1')->only() == 'style' && empty(self::getUri('3')->only())){
+            header("Content-type: text/css");
             Template::$tmp = false;
-
             $file = $root_dir.'/Templates/'.Info::get('template').'/style/'.self::getUri('2')->only();
         }elseif(self::getUri('1')->only() == 'script' && empty(self::getUri('3')->only())){
+            header('Content-Type: application/javascript');
             Template::$tmp = false;
             $file = $root_dir.'/Templates/'.Info::get('template').'/script/'.self::getUri('2')->only();
         }elseif(self::getUri('1')->only() == 'img' && empty(self::getUri('3')->only())) {
@@ -48,11 +49,12 @@ class Rout extends Info {
         }elseif(self::getUri('1')->only() == 'tmp' && !empty(self::getUri('3')->only())){
             Template::$tmp = false;
             $file = $root_dir.'/Templates/'.self::getUri('2')->all();
-
         }elseif (self::getUri('1')->only() == 'style' && !empty(self::getUri('3')->only())){
+            header("Content-type: text/css");
             Template::$tmp = false;
             $file = $root_dir.'/Modules/'.self::getUri('2')->only().'/style/'.self::getUri('3')->all();
         }elseif (self::getUri('1')->only() == 'script' && !empty(self::getUri('3')->only())){
+            header('Content-Type: application/javascript');
             Template::$tmp = false;
             $file = $root_dir.'/Modules/'.self::getUri('2')->only().'/script/'.self::getUri('3')->all();
         }elseif (self::getUri('1')->only() == 'img' && !empty(self::getUri('3')->only())){

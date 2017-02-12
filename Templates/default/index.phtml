@@ -1,13 +1,26 @@
-<head>
-    <title>{% TITLE %}</title>
-    <link rel="stylesheet" type="text/css" href="{% SITE %}/style/bootstrap.min.css">
-    <script src="{% SITE %}/script/jquery.min.js"></script>
-    <script src="{% SITE %}/script/bootstrap.min.js"></script>
-    {% STYLES %}
-    {% SCRIPTS %}
-</head>
-<body>
-    <div class="container">
-        {% CONTENT %}
-    </div>
-</body>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% TITLE %}</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+        <link rel="stylesheet" type="text/css" href="{% SITE %}/style/bootstrap.min.css">
+        <script src="{% SITE %}/script/jquery.min.js"></script>
+        <script src="{% SITE %}/script/bootstrap.min.js"></script>
+        {% STYLES %}
+        {% SCRIPTS %}
+        <style>
+            body {
+                position: relative;
+            }
+            #bs-docs-sidebar{
+                width: 15%;
+            }
+        </style>
+    </head>
+    <body data-spy="scroll" data-target="#bs-docs-sidebar" data-offset="20">
+        <div class="container">
+            {% CONTENT %}
+        </div>
+    </body>
+</html>

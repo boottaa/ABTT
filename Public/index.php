@@ -18,12 +18,14 @@ if(Info::get('devolper')){
 Dashboard::start();
 }
 
-echo Template::mod();
+$html = Template::mod();
 
 if(Info::get('devolper')){
     Dashboard::end();
-    Dashboard::view_statistics();
+    Dashboard::view_statistics($html);
 }
+
+echo $html
 //$info = 'Затрачено мб: '.round(($ramEnd - $ramStart)/1024/1024, 3).' Затрачено времени: '.round($timeEnd - $timeStart, 3).' микросекунд';
 //position: fixed; left: 0px; bottom: 0px; width: 100%; padding: 0px; margin: 0px;
 /*<!-------------Проблема Джава скрипты не грузятся из за того что тут что то написано. ------------>
@@ -35,4 +37,10 @@ if(Info::get('devolper')){
 </div>
 </div>
 </nav>-->*/
+
+
 ?>
+
+
+
+

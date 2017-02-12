@@ -39,7 +39,7 @@ class Dashboard extends Template {
         return $result;
     }
     //Выводит html форму статистики.
-    public static function view_statistics(){
+    public static function view_statistics(&$content){
         //вывод запросов в бд
         $query = SQL::get_all_query();
         $getErrors = self::$errors;
@@ -173,7 +173,7 @@ class Dashboard extends Template {
             </script>
             ";
         }
-        echo $html;
+        $content = str_replace('</body>', $html.'</body>', $content);
     }
     //Отлавливаем ошибки:    /////////////////////////////////
     public static function ErrorHandler($errno, $errstr, $errfile, $errline)
