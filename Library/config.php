@@ -5,17 +5,18 @@
  * Date: 02.02.17
  * Time: 9:38
  */
+
 return [
     'base' => [
         //домен.
-        'site' => "http://www.abtt.dev",
+        'site' => "http://ex.dev",
         //Корневая дериктория веб приложения.
-        'root_dir' => '/www/xampp/ABTT',
+        'root_dir' => '/www',
         //Шаблон по умолчанию
         'template' => 'default',
         //Режим разработчика
         'devolper' => true,
-
+        
     ],
     //Сервера my_sql
     'database' => [
