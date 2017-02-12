@@ -15,16 +15,16 @@ return [
         //Шаблон по умолчанию
         'template' => 'default',
         //Режим разработчика
-        'devolper' => true,
+        'devolper' => $_SERVER['APPLICATION_ENV'],
         
     ],
     //Сервера my_sql
     'database' => [
         'default' => [
             //Сервер для подключения к mysql серверу
-            'DB_SERV'   =>'localhost',
+            'DB_SERV'   =>'192.168.33.10',
             //Пользователь для подключения к mysql серверу
-            'DB_USER'   =>'root',
+            'DB_USER'   =>'bootta',
             //Пароль для подключения к mysql серверу
             'DB_PASS'   =>'1991',
             'DB_PRIFIX' => '',
@@ -33,7 +33,8 @@ return [
             //Это сделано для безопасности и возможности сразу увидеть какие бд использует веб приложения.
             'DB_NAME'   => [
                 'default',
-                'new_q'
+                'new_q',
+                'docs'
             ],
         ],
         'test' => [

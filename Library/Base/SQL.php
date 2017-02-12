@@ -2,6 +2,11 @@
 require_once __DIR__.'/Connect.php';
 class SQL extends Connect{
 
+    public function __construct()
+    {
+    }
+
+
     private static $allquery = array();
     private static $DB_NAME = 'default';
 

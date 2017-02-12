@@ -6,21 +6,22 @@
  * Time: 13:43
  * memory_get_usage(false)/1024/1024;
  */
-
-
-
+/*echo '<pre>';
+print_r($_SERVER);
+echo '</pre>';
+exit();*/
 require_once '../loader.php';
 
 // set to the user defined error handler
 set_error_handler("Dashboard::ErrorHandler");
 
-if(Info::get('devolper')){
+if(Info::get('devolper') == 'devolper'){
 Dashboard::start();
 }
 
 $html = Template::mod();
 
-if(Info::get('devolper')){
+if(Info::get('devolper') == 'devolper'){
     Dashboard::end();
     Dashboard::view_statistics($html);
 }
