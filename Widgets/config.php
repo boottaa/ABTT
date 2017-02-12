@@ -8,6 +8,7 @@
 
 return [
     '{% MENU %}'=>'Menu/Menu',
+    '{% DOCS:MENU %}'=>'Menu/Docs_menu',
     '{% ACART %}'=>'Cart/Cart',
     '{% ADMIN:MENU %}'=>'Admin/Admin',
 ];
