@@ -5,26 +5,25 @@
  * Date: 02.02.17
  * Time: 9:38
  */
-
 return [
     'base' => [
         //домен.
-        'site' => "http://ex.dev",
+        'site' => "http://www.abtt.dev",
         //Корневая дериктория веб приложения.
-        'root_dir' => '/www',
+        'root_dir' => '/www/xampp/ABTT',
         //Шаблон по умолчанию
         'template' => 'default',
         //Режим разработчика
-        'devolper' => $_SERVER['APPLICATION_ENV'],
-        
+        'devolper' => true,
+
     ],
     //Сервера my_sql
     'database' => [
         'default' => [
             //Сервер для подключения к mysql серверу
-            'DB_SERV'   =>'192.168.33.10',
+            'DB_SERV'   =>'localhost',
             //Пользователь для подключения к mysql серверу
-            'DB_USER'   =>'bootta',
+            'DB_USER'   =>'root',
             //Пароль для подключения к mysql серверу
             'DB_PASS'   =>'1991',
             'DB_PRIFIX' => '',

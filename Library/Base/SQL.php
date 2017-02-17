@@ -66,7 +66,7 @@ class SQL extends Connect{
     }
 
     public static function select($table, $rows = array('*'), $where = ''){
-        $table = parent::db_prifix().$table;
+        $table = self::db_prifix().$table;
 
         $rows = implode(", ", $rows);
         $query = "SELECT $rows FROM `".self::$DB_NAME."`.`$table` $where";
@@ -76,7 +76,7 @@ class SQL extends Connect{
     
     //$data данные в ассоцеативном массиве
     public static function insert($table, $data){
-            $table = parent::db_prifix().$table;
+            $table = self::db_prifix().$table;
             $rows = '';
             $values = '';
             $count = 0;
@@ -98,7 +98,7 @@ class SQL extends Connect{
     }
 
     public static function insertArray($table, $data){
-        $table = parent::db_prifix().$table;
+        $table = self::db_prifix().$table;
         $VALUES = '';
         foreach ($data as $index=>$val) {
             if(count($data) == ($index+1)){
@@ -128,7 +128,7 @@ class SQL extends Connect{
             }
             $value .= $v."='".$k."'".$EOD;
         }
-        $table = parent::db_prifix().$table;
+        $table = self::db_prifix().$table;
         $query = "UPDATE `".self::$DB_NAME."`.`$table` SET $value $where";
         //echo '<p style="margin-left: 300px;">'.$query.'</p>';
         return self::query($query, __FUNCTION__);
@@ -138,7 +138,7 @@ class SQL extends Connect{
     }
 
     public static function delete($table, $where){
-        $table = parent::db_prifix().$table;
+        $table = self::db_prifix().$table;
         $query = "DELETE FROM `".self::$DB_NAME."`.`$table` $where";
         //echo '<p style="margin-left: 300px;">'.$query.'</p>';
         return self::query($query, __FUNCTION__);
@@ -151,5 +151,8 @@ class SQL extends Connect{
         return self::$allquery;
     }
 
-    
+	protected static function db_prifix (){
+		return Info::get_db('DB_PRIFIX', self::$DB_ADAPTER) ?? '';
+	}
+
 }

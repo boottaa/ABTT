@@ -6,9 +6,8 @@
  * Time: 0:39
  */
 class Dashboard extends Template {
-    static private $info, $errors = array();
-    //Определяет будет ли виден дашбоард
-    static public $view = true;
+    static private $info, $errors = array(), $view = true;
+
 
     //Начинает сбор статистики
     public static function start()
