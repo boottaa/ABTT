@@ -8,38 +8,34 @@
 
 class Info{
 
-    private static $ini;
+    private static $config;
 
-    private static function getini(){
-        if(empty(self::$ini)) {
-            self::$ini = require dirname(__DIR__) . '/config.php';
+    private static function getconfig(){
+        if(empty(self::$config)) {
+            self::$config = require dirname(__DIR__) . '/config.php';
         }
-        return self::$ini;
+        return self::$config;
     }
 
     public static function get($val = '', $type='base'){
-        self::getini();
+        self::getconfig();
 
         if($val == 'ALL'){
-            $r['ALL'] = self::$ini;
+            $r['ALL'] = self::$config;
         }else{
-            $r= self::$ini[$type][$val];
+            $r= self::$config[$type][$val];
         }
         return $r;
     }
 
     public static function get_db($param = '', $name = 'default'){
-        self::getini();
+        self::getconfig();
 
         if(empty($param)){
-            $r = self::$ini['database'][$name];
+            $r = self::$config['database'][$name];
         }else{
-            $r = self::$ini['database'][$name][$param];
+            $r = self::$config['database'][$name][$param];
         }
-            /*echo '<pre>';
-            print_r(self::$ini);
-            echo '</pre>';
-            exit('xxx');*/
         return $r;
 
 
@@ -62,7 +58,7 @@ class URL{
     public function all(){
 
         foreach (self::$array_url as $key => $val)
-            if (is_numeric($val)) // only numbers, a point and an `e` like in 1.1e10
+            if (is_numeric($val))
                 unset(self::$array_url[$key]);
         return implode('/', self::$array_url);
     }

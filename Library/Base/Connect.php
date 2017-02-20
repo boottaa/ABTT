@@ -19,10 +19,8 @@ class Connect{
             die('Соединение оборвалось:'. $e->getMessage());
         }
     }
-    public static function db_prifix (){
-        return Info::get_db('DB_PRIFIX', self::$DB_ADAPTER) ?? '';
-    }
-    public static function _connect(){
+
+	protected static function _connect(){
         if(self::$_ins instanceof self){
             return self::$_ins;
         }else{
