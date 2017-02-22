@@ -356,9 +356,9 @@ echo '</pre>';*/
     </section>
 
     <section id="config" >
-        <h3 style="color: #787878;">Настройка (config)</h3><hr /><br />
-        <p>
-            Основные найтройки Framework осущевстляются в файле "<i>config.php</i>"
+        <h3 style="color: #787878;">Навигация Rout.php</h3><hr /><br />
+        <p id="Routing::navigation">
+
         </p>
         <table class="table">
             <tr>
@@ -383,8 +383,9 @@ echo '</pre>';*/
                 <td>
                     (private static) on -$dir </td>
                 <td>
-                    Определяет тип файл, если изображения то подгружаем другим способам использовав функцию
-                    "fpassthru" а не обычное подключение 'include'.
+                    Метод отвечает за построничную навигацию внутри модуля если подулючить данный метод в любом модуле,
+                    то при обращение к модулю будет поключен файл index.php из деректории view. (/Modules/имя_модуля/view/index.php)<br />
+                    <a href="#Routing::navigation">Подробнее о навигации тут</a>
                 </td>
             </tr>
         </table>
