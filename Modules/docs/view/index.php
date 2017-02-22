@@ -6,7 +6,8 @@
  * Time: 21:08
  */
 use Module\docs\Controller\GetDocs;
-
+Template::set_title('Документация');
+Template::set_tmp(true);
 /*echo '<pre>';
 print_r((new GetDocs())->docs_all());
 echo '</pre>';*/
@@ -162,14 +163,231 @@ echo '</pre>';*/
                 </td>
             </tr>
         </table><hr />
-        
+
     </section>
     <section id="Dashboard">
         <h3  style="color: #787878;">Dashboard</h3><hr />
         <p>
-            Класс Dashboard отвечает за вывод информации и перехват ошибок приложения, так же данный класс выводит панель разработчика,
+            Класс Dashboard отвечает за вывод информации и перехват ошибок приложения, вывод SQL запросов, так же данный класс выводит панель разработчика,
             время и количество затраченых мб на работу приложения.
         </p>
+        <table class="table">
+            <tr>
+                <th>Название метода</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>
+                    (public static) start
+                </td>
+                <td>
+                    Метод инцелизирует начала сбора информации о приложение (о потребляемой памяти и времени);
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (public static) end
+                </td>
+                <td>
+                    Метод завершает сбор информации и подсчитывает собронные данные, для вывода их в Dashboard
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (public static) view_statistics
+                </td>
+                <td>
+                    Метод завершает сбор информации и подсчитывает собронные данные, для вывода их в Dashboard
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (public static) ErrorHandler
+                </td>
+                <td>
+                    Метод используется для получения информации об ошибки и вывода ее в панель Devolper. Данный метод испльзуется во входном файле ( /Public/index.php ): set_error_handler("Dashboard::ErrorHandler");
+                </td>
+            </tr>
+
+        </table><hr />
+    </section><br /><br />
+    <section id="Template">
+        <h3  style="color: #787878;">Template</h3><hr />
+        <p>
+            Класс Template обеспечивает шаблонизацию всего проекта, так же через данный класс возможно изменить шабон (подключить другой) для конкретного модуля или отключить шаблонизацию для модуля.
+            Так же данный класс заменяет спец теги, позволяет подключить (js, css) скрипты для конкретного модуля.
+        </p>
+        <table class="table">
+            <tr>
+                <th>Название свойства</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>
+                    (protected static) $styles
+                </td>
+                <td>
+                    Свойства в котором хранятся все ссылки на "css" подключаемые файлы.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (protected static) $scripts
+                </td>
+                <td>
+                    Свойства в котором хранятся все ссылки на "javascript" подключаемые файлы.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (protected static) $str
+                </td>
+                <td>
+                    Свойства в котором хранятся все ссылки на "javascript" подключаемые файлы.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (protected static) $title
+                </td>
+                <td>
+                    Свойства в котором хранятся данные о загаловке странице путем замены '{% TITLE %}' на указанный заголовок. Методам
+                    <a href="#Template::set_title"> Template::set_title() </a> можно задать название любой страницы прям в шаблоне.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (protected static) $tmp
+                </td>
+                <td>
+                    Свойства в котором хранятся данные о подключаемом шаблоне. Методам
+                    <a href="#Template::set_tmp"> Template::set_tmp() </a> можно задать шаблоне как в
+                    <a href="#Module::conf.php">conf.php</a> (конфигурационный файл модуля) так и в самом предсталение.
+                </td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <tr>
+                <th>Название метода</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>
+                    (public static) addTeg -$teg -$replase
+                </td>
+                <td>
+                    Метод добавляет тег который будет заменен в проццеси работы приложения, теги желательно прописывать в фигрных скобках - {% YOU_TEG %},
+                    Где YOU_TEG имя вашего тега.
+                    <ul>
+                        <li>$teg - имя тега который нужно заменить</li>
+                        <li>$replase - указываем на что заменяем</li>
+                    </ul>
+                    Пример добавления тега корзина: Template::addTeg('{% TEG_CART %}', 'КОРЗИНА'). <br />
+                    В данном примере все теги '{% TEG_CART %}' будут заменены словам 'КОРЗИНА'.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (public static) addScript -$script
+                </td>
+                <td>
+                    Метод подключает JavaScript.
+
+                    <ul>
+                        <li>$script - Указывает название скрипта</li>
+                    </ul>
+                    Пример добавление скрипта из шаблона (Templates):
+                    <br />
+                    Template::addScript('you_script.js');<br />
+                    Где "you_script.js" имя скрипта в папке "Template/default/script". <a href="#create::Template">О создание шаблона читайте тут</a>
+                    <br /><br />
+                    Добавление скрипта из Модуля: <br />
+                    Template::addScript('mod_name/you_script.js'); <br />
+                    Где "mod_name" имя модуля а "you_script.js" имя файла.<br />
+                    <b>Внимание: </b> скрипт должен находиться в дериктории "/Template/имя_модуля/script/имя_скрипта.js"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (public static) addStyle -$style
+                </td>
+                <td>
+                    Метод подключает CSS.
+                    <ul>
+                        <li>$style - Указывает название css файла</li>
+                    </ul>
+                    Пример добавление css файла из шаблона ( Templates ):
+                    <br />
+                    Template::addStyle('you_style.css');<br />
+                    Где "you_style.css" имя скрипта в папке "Template/default/style". <a href="#create::Template">О создание шаблона читайте тут</a>
+                    <br /><br />
+                    Добавление скрипта из Модуля: <br />
+                    Template::addStyle('mod_name/you_style.css'); <br />
+                    Где "mod_name" имя модуля а "you_style.css" имя файла.<br />
+                    <b>Внимание: </b> скрипт должен находиться в дериктории "/Template/имя_модуля/style/имя_стиля.css"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (public static) set_title -$name
+                </td>
+                <td>
+                    Метод указывает имя страницы в тегах <?= htmlspecialchars('<title>') ?>, можно указать как в шаблрне модуля так и для модуля целиком указав в config.php <a href="#create::Modul">подробнее о создание модуля читайти тут</a>
+                    <ul>
+                        <li>$name - имя страницы которое будет прописано в <?= htmlspecialchars('<title>') ?></li>
+                    </ul>
+                    Пример указания заголовка 'Новая страница': Template::set_title('Новая страница').
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    (public static) set_tmp -$tmp
+                </td>
+                <td>
+                    Метод указывает имя шаблона или отключает его полностью если передать булево значения false, можно указать как в шаблрне модуля так и для модуля целиком (если для вашего модуля нужна другая шаблонизация или хотите отключить ее) указав в config.php <a href="#create::Modul">подробнее о создание модуля читайти тут</a>
+                    <ul>
+                        <li>$tmp - имя шаблона который будет выбран</li>
+                    </ul>
+                    Пример отключения шаблона: Template::set_tmp(false).
+                </td>
+            </tr>
+        </table><hr />
+    </section>
+
+    <section id="config" >
+        <h3 style="color: #787878;">Настройка (config)</h3><hr /><br />
+        <p>
+            Основные найтройки Framework осущевстляются в файле "<i>config.php</i>"
+        </p>
+        <table class="table">
+            <tr>
+                <th>Название своства</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>
+                    (private static) <br />$isimg = false </td>
+                <td>
+                    Определяет тип файл, если изображения то подгружаем другим способам использовав функцию
+                    "fpassthru" а не обычное подключение 'include'.
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <tr>
+                <th>Название метода</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>
+                    (private static) on -$dir </td>
+                <td>
+                    Определяет тип файл, если изображения то подгружаем другим способам использовав функцию
+                    "fpassthru" а не обычное подключение 'include'.
+                </td>
+            </tr>
+        </table>
     </section>
 </div>
 
