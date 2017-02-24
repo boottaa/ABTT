@@ -60,8 +60,9 @@ echo '</pre>';*/
                 <td>
                     database
                 </td>
-                <td>
-                    Содержит информацию о подключаемых серверов БД. Может содержать следующие данные:
+                <td id="config::database">
+                    Содержит информацию о подключаемых серверов БД. Могут быть прописанны сразу несколько серверов для подключения.
+                    Содержит следующие данные:
                     <ul>
                         <li>
                             DB_SERV - Имя хоста или IP для подключения к mysql серверу
@@ -273,7 +274,7 @@ echo '</pre>';*/
                 <th>Описание</th>
             </tr>
             <tr>
-                <td>
+                <td id="Template::addTeg">
                     (public static) addTeg -$teg -$replase
                 </td>
                 <td>
@@ -355,10 +356,10 @@ echo '</pre>';*/
         </table><hr />
     </section>
 
-    <section id="config" >
-        <h3 style="color: #787878;">Навигация Rout.php</h3><hr /><br />
+    <section id="Rout" >
+        <h3 style="color: #787878;">Rout</h3><hr />
         <p id="Routing::navigation">
-
+            Основной класс отвечающей за навигацию подключения файлов и опрделения типов файлов.
         </p>
         <table class="table">
             <tr>
@@ -381,15 +382,240 @@ echo '</pre>';*/
             </tr>
             <tr>
                 <td>
-                    (private static) on -$dir </td>
+                    ( public static ) on -$dir </td>
                 <td>
                     Метод отвечает за построничную навигацию внутри модуля если подулючить данный метод в любом модуле,
                     то при обращение к модулю будет поключен файл index.php из деректории view. (/Modules/имя_модуля/view/index.php)<br />
                     <a href="#Routing::navigation">Подробнее о навигации тут</a>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    ( public static ) int </td>
+                <td>
+                    Метод евляется входной точкой в инцелизации проекта,
+                    запускает шаблонизацию и отвечает за маршрутизацию во всем проекте.
+                    Так же метод подключает спец теги
+                    <a href="#Template::addTeg"> (подробнее о тегах тут) </a>
+                    <a href="#Routing::navigation">Подробнее о навигации тут</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ( private static ) tegs -$content
+                </td>
+                <td>
+                    Метод отвечает за построничную навигацию внутри модуля если подулючить данный метод в любом модуле,
+                    то при обращение к модулю будет поключен файл index.php из деректории view. (/Modules/имя_модуля/view/index.php)<br />
+                    <a href="#Routing::navigation">Подробнее о навигации тут</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ( private static ) routing
+                </td>
+                <td>
+                    Отвечает за определения типа файла подгрузку их из модулей и шаблона.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ( private static ) check404
+                </td>
+                <td>
+                    Метод проверяет существования файла и если файл не найден выдает 404 ошибку.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ( private static ) widgets
+                </td>
+                <td>
+                    Метод подключает виджеты из коталога "Widgets" и добавляет спец теги используя метод
+                    <a href="#Template::addTeg">Template::addTeg</a>.
+                    Для поключения виджета в представления модуля.
+                </td>
+            </tr>
         </table>
     </section>
+
+    <section id="SQL">
+        <h3  style="color: #787878;">Запросы в БД. SQL</h3><hr />
+        <p>
+            Класс SQL взаимодействует с БД используя синтаксисы встроеных запросов
+        </p>
+        <table class="table">
+            <tr>
+                <th>Название свойства</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td id="SQL::$allquery">
+                    ( private static ) $allquery
+                </td>
+                <td>
+                    Свойства собирает все запросы в бд и затраченное время на их выполнения, в последующем передает данные в
+                    в метод <a href="#SQL::get_all_query">get_all_query</a>
+                </td>
+                <td>
+                    ( private static ) $DB_NAME
+                </td>
+                <td>
+                    Свойства передает в SQL запрос имя БД в которую будет отправлен запрос.<br />
+                    Данное ствойста игнорируется при прямом обращение в бд через метод <a href="#SQL::que">SQL::que</a>
+                    и при обращение через метод <a href="#SQL::prepare">SQL::prepare</a>
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <tr>
+                <th>Название метода</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td>
+                    ( private static ) query
+                </td>
+                <td>
+                    Основной метод класса SQL, отвечает за отправку запросов в MySQl СУБД по средством PHP PDO.
+                    Так же метод собирает информацию о запросах и затраченного времени в свойства
+                    <a href="#SQL::$allquery">$allquery</a>. в случае ошибки (в запросе) возвращает: waring.
+                    В ином случае возвращает результат из БД.
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::que">
+                    ( public static ) que -$query
+                </td>
+                <td>
+                    Метод отправляет любой написанный запрос в БД.<br />
+                    $query - указывает запрос который нужно отправить в БД.
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::prepare">
+                    ( public static ) prepare -$query
+                </td>
+                <td>
+                    Метод подгтовливает  запрос для отправки в БД используя конструкцию <a href="http://php.net/manual/ru/pdo.prepare.php">PDO::prepare</a>.
+                    Для отправки запроса в БД используйте метод <a href="http://php.net/manual/ru/pdostatement.execute.php">execute </a><br />
+                    $query - указывает запрос который нужно отправить в БД.
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::select">
+                    ( public static ) select -$table -$rows = array('*') -$where = ''
+                </td>
+                <td>
+                    Метод отправляет SELECT в БД и возвращает данные из БД.
+                    <ul>
+                        <li>( string ) $table - Имя таблицы в которую будет отправлен запрос</li>
+                        <li>( array ) $rows - Поля в которые будут выбраны при селекторном запросе. По умолчанию "*" все поля.</li>
+                        <li>( string ) $where - Условия по которому будут выбраны поля из БД.</li>
+                    </ul>
+                </td>
+                Пример запроса в БД где статус будет равно 1:<br />
+                SQL::select('users', ['*'], 'where status=1');
+            </tr>
+            <tr>
+                <td id="SQL::insert">
+                    ( public static ) insert -$table -$data
+                </td>
+                <td>
+                    Метод добавляет в БД запись используя конструкцию INSERT INTO.
+                    <ul>
+                        <li>( string ) $table - Имя таблицы в которую будет отправлен запрос.</li>
+                        <li>( array ) $data - Данные которые будут записаны в таблицу.</li>
+                    </ul>
+                    Пример добавления пользователя: SQL::insert('users',
+                    ['name' => 'Вася', 'password' => '123', 'status' => 1])
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::insertArray">
+                    ( public static ) insertArray -$table -$data
+                </td>
+                <td>
+                    Метод добавляет в БД несколько записей используя конструкцию INSERT INTO.
+                    <ul>
+                        <li>( string ) $table - Имя таблицы в которую будет отправлен запрос.</li>
+                        <li>( array ) $data - Данные которые будут записаны в таблицу.</li>
+                    </ul>
+                    Пример добавления нескольких пользователей: SQL::insert('users', <br />
+                    array(['name' => 'Дима', 'password' => '121', 'status' => 0], <br />
+                    ['name' => 'Женя', 'password' => '231', 'status' => 0])); <br />
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::update">
+                    ( public static ) update -$table -$data -$where = ''
+                </td>
+                <td>
+                    Метод обновляет данные в БД используя конструкцию UPDATE.
+                    <ul>
+                        <li>( string ) $table - Имя таблицы в которую будет отправлен запрос.</li>
+                        <li>( array ) $data - Данные которые будут записаны в таблицу.</li>
+                        <li>( string ) $where - Условия по которому будут выбраны поля из БД.</li>
+                    </ul>
+                    Пример обновления пользователя с id равным 1: <br />SQL::update('users',
+                    array(['name' => 'Алексей'], 'where id=1');
+                </td>
+            </tr>
+
+            <tr>
+                <td id="SQL::delete">
+                    ( public static ) delete -$table -$where
+                </td>
+                <td>
+                    Метод удаляет данные из БД используя конструкцию DELETE.
+                    <ul>
+                        <li>( string ) $table - Имя таблицы в которую будет отправлен запрос.</li>
+                        <li>( string ) $where - Условия по которому будут выбраны поля из БД.</li>
+                    </ul>
+                    Пример удаляет пользователя с id равным 1: <br />SQL::delete('users', 'where id=1');
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::get_all_query">
+                    ( public static ) get_all_query
+                </td>
+                <td>
+                    Метод возвращает все запросы отправленные в БД используя класс SQL.
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::set_adapter">
+                    ( public static ) set_adapter -$db_name = 'default' -$adapter = 'default'
+                </td>
+                <td>
+                    Метод определяет сервер и БД  в которую будет отправлен запрос.
+                    И проверяет существования бд в <a href="#config::database">config</a>
+                    по средствам метода <a href="#SQL::set_database">set_database</a>
+                    <ul>
+                        <li>( string ) $db_name - Имя БД в которую будет отправлен запрос указывается в
+                            <a href="#config::database">config</a></li>
+                        <li>( string ) $adapter -  Имя адаптера (сервера) к которому будет отправлен запрос в БД.
+                            Адаптер указывается в <a href="#config::database">config</a></li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td id="SQL::set_database">
+                    ( private static ) set_database -$name -$adapter
+                </td>
+                <td>
+                    Метод проверяет существования БД  в текущем адаптере, проверяет в <a href="#config::database">config</a>.
+                    <ul>
+                        <li>( string ) $name - Имя БД в которую будет отправлен запрос указывается в
+                            <a href="#config::database">config</a></li>
+                        <li>( string ) $adapter -  Имя адаптера (сервера) к которому будет отправлен запрос в БД.
+                            Адаптер указывается в <a href="#config::database">config</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+
 </div>
 
 <script>
