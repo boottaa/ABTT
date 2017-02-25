@@ -7,9 +7,9 @@
  */
 namespace index\Model;
 /**
- * Class Users
+ * @class Users
  * @package index\Model
- * 
+ *
  */
 class Users extends \SQL {
 
@@ -19,5 +19,15 @@ class Users extends \SQL {
     public function getTest(){
         $res = parent::select('clients')->fetchAll();
         return $res;
+    }
+
+    /**
+     * @method Users.test -
+     * @param array $x - передаем имя пользователя
+     * @param $z - передаем пароль пользователя
+     * @return string
+     */
+    public function test(array $x, $z){
+        return 'hello';
     }
 }
