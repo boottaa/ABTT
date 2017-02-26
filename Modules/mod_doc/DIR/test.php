@@ -7,9 +7,10 @@
  */
 
 /**
- * @function testick-руру
+ * @function testick-руру geg
  * @param $x
  * @param array $z
+ * @exeple add(test);
  */
 function testick($x, array $z){
 
