@@ -24,19 +24,6 @@ class Dashboard extends Template {
         //Получаем все подключенные файлы.
         self::$info['get_included_files'] = get_included_files();
     }
-    public static function get_info($need = ''){
-        $result = array();
-        if($need == ''){
-            $result = self::$info;
-        }else{
-            if(!empty(self::$info[$need])){
-                $result[$need] = self::$info[$need];
-            }else{
-                $result[$need] = 'Ошибка: элемент не найден';
-            }
-        }
-        return $result;
-    }
     //Выводит html форму статистики.
     public static function view_statistics(&$content){
         //вывод запросов в бд

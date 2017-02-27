@@ -6,38 +6,83 @@
  * Time: 15:38
  */
 
-abstract class Test{
-	private $_queue;
-	/**
-	 * @var \Fabrikant\Queue2\Exchange
-	 */
-	private $_exchange;
+class ssql{
+    private $query;
+    private static $DB_NAME = 'db_name';
+    public function select($table, array $rows = ['*']){
+        $rows = implode(", ", $rows);
+        $this->query = "select {$rows} FROM ".self::$DB_NAME.'.'.$table;
+        return $this;
+    }
 
-	private $_queName;
-
-	const HELLO = 2;
-
-	public function __construct()
-	{
-		/*$this->_exchange = (new \Fabrikant\Queue2(Registry::get('queue_config')))->getExchange(self::QUEUE_NAME);
-		$this->_queue = $this->_exchange->getQueue(self::QUEUE_NAME);*/
-	}
-
-	abstract function push($x, $y, $z);
-
-	protected function pop(){
-		echo 'xx';
-	}
-
+    public function where ($where){
+        $this->query .= ' where '.$where;
+        return $this;
+    }
+    public function query(){
+        echo $this->query;
+    }
 }
 
-class xxx extends Test {
-	public function he(){
 
-	}
-	public function push($x, $y, $z){
-		echo self::pop();
-	}
+class stat{
+    private static $query;
+    private static $DB_NAME = 'db_name';
+    public static function select($table, array $rows = ['*']){
+        $rows = implode(", ", $rows);
+        self::$query = "select {$rows} FROM ".self::$DB_NAME.'.'.$table;
+        //echo self::$query;
+        return new self();
+    }
+
+    public function where($where){
+        self::$query .= ' where '.$where;
+        return $this;
+    }
+
+    public function gg($as = 'heheh'){
+        self::$query .= $as;
+        return new self();
+    }
+    public function ec(){
+        echo '<pre>';
+        print_r(__);
+        echo '</pre>';
+        echo self::$query;
+    }
 }
 
-(new xxx)->push();
+
+
+stat::select('stat_test')->where('id in ("1", "2")')->gg()->ec();
+
+$dir = Info::get('root_dir');
+$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir), RecursiveIteratorIterator::SELF_FIRST );
+$result = [];
+foreach ( $iterator as $path ) {
+    //if($path->isDot()) continue;
+    if ($path->getExtension() == 'php') {
+        $result[] = $path->getPathname() . PHP_EOL;
+    } else {
+      //  $result[] = $path->getPathname() . PHP_EOL;
+    }
+}
+echo '<pre>';
+print_r($result);
+echo '</pre>';
+?>
+<div class="test">test</div>
+<script>
+    window.B = function($x){
+
+        var $elem = document.querySelector($x);
+
+        return this.ob = {
+            html : function($text){
+                $elem.innerHTML = $text;
+            }
+        }
+    };
+
+
+</script>
