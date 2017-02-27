@@ -8,9 +8,9 @@
 
 /**
  * @function testick-руру geg
- * @param $x
- * @param array $z
- * @exeple add(test);
+ * @param $x - Входит
+ * @param array $z -выходит
+ * @exemple add(test);
  */
 function testick($x, array $z){
 

@@ -12,7 +12,9 @@ header('Content-Type: text/html; charset=utf-8');
  */
 class Rout extends Template {
 
-
+	/**
+	 * @var bool
+	 */
 	private static $isimg = false;
 
 	/**

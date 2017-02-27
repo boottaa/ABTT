@@ -9,13 +9,13 @@
 return [
     'base' => [
         //домен.
-        'site' => "http://ex.dev",
+        'site' => "http://www.abtt.dev",
         //Корневая дериктория веб приложения.
-        'root_dir' => '/www',
+        'root_dir' => '/www/xampp/ABTT',
         //Шаблон по умолчанию
         'template' => 'default',
         //Режим разработчика
-        'devolper' => $_SERVER['APPLICATION_ENV'],
+        'devolper' => true,
 
     ],
     //Сервера my_sql

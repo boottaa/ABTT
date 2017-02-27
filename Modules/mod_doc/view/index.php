@@ -11,12 +11,26 @@ $result = A_ScanDir($dir, $meme);
 
 
 $dataHTML = '<div class="tab-content col-lg-offset-4 col-lg-8">';
+$dataHTML .= '<div role="tabpanel" class="tab-pane active" >
+<h2>Основные правила</h2>
+<p>
+    <ul>
+        <li>@method - Имя метода - его описание.</li>
+        <li>@function - Имя функции - ее описание.</li>
+        <li>@param - Имя входного параметра - его описание.</li>
+        <li>@class - Имя класса - его описание</li>
+        <li>@exemple - Пример работы</li>
+        <li>@class - Имя класса - его описание</li>
+        <li>@var - Переменная - ее описание</li>
+    </ul>
+</p>
+</div>';
 
 $menuHTML = '<nav id="bs-docs-sidebar" style="padding-right: 50px;" class="bs-docs-sidebar hidden-print hidden-sm hidden-xs affix">
 		<ul class="nav bs-docs-sidenav">';
 foreach (ff($result) as $key=>$val){
     $href = '';
-    $menuHTML .= '<li><a href="#">'.$key.'<span style="margin-top: 8px;" class="caret pull-right"></span></a>';
+    $menuHTML .= '<li><a href="#">'.$key.'<span style="margin-top: 8px;position: absolute; right: 8px;" class="caret"></span></a>';
     $menuHTML .= '<ul class="nav" role="tablist">';
     foreach ($val as $class=>$v){
         $href = str_replace(['/', '.'], '_', "{$key}-{$class}");
@@ -47,7 +61,7 @@ function ff(&$array){
         '@param' => 'Входной параметр:',
         '@return' => 'Возвращает:',
         '@class' => 'Класс:',
-        '@exeple' => 'Пример:'
+        '@exemple' => 'Пример:'
     ];
 
     $r = str_replace(array_keys($need), array_values($need), $str);
