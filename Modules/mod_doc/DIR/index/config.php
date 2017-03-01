@@ -10,8 +10,6 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-Template::$tmp = true;
-Template::$title = 'Hello w';
 Template::addScript('admin/newChat.js');
 Template::addStyle('admin/sb-admin-2.css');
 

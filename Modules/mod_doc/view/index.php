@@ -13,7 +13,6 @@ $result = A_ScanDir($dir, $meme);
 $dataHTML = '<div class="tab-content col-lg-offset-4 col-lg-8">';
 $dataHTML .= '<div role="tabpanel" class="tab-pane active" >
 <h2>Основные правила</h2>
-<p>
     <ul>
         <li>@method - Имя метода - его описание.</li>
         <li>@function - Имя функции - ее описание.</li>
@@ -23,7 +22,7 @@ $dataHTML .= '<div role="tabpanel" class="tab-pane active" >
         <li>@class - Имя класса - его описание</li>
         <li>@var - Переменная - ее описание</li>
     </ul>
-</p>
+
 </div>';
 
 $menuHTML = '<nav id="bs-docs-sidebar" style="padding-right: 50px;" class="bs-docs-sidebar hidden-print hidden-sm hidden-xs affix">
@@ -49,19 +48,17 @@ foreach (ff($result) as $key=>$val){
 $menuHTML .= '</ul></nav>';
 
 
-//
-/*echo '<pre class="col-lg-offset-4 col-lg-8">';
-print_r(ff($result));
-echo '</pre>';*/
+
 function ff(&$array){
     $str = json_encode($array);
     $need = [
-        '@method' => 'Метод:',
-        '@function' => 'Функция:',
-        '@param' => 'Входной параметр:',
-        '@return' => 'Возвращает:',
-        '@class' => 'Класс:',
-        '@exemple' => 'Пример:'
+        '@method' => '<i>Метод</i>:',
+        '@function' => '<i>Функция</i>:',
+        '@param' => '<i>Входной параметр</i>:',
+        '@return' => '<i>Возвращает</i>:',
+        '@class' => '<i>Класс</i>:',
+        '@exemple' => '<i>Пример</i>:',
+        '@var' => '<i>Переменная</i>:'
     ];
 
     $r = str_replace(array_keys($need), array_values($need), $str);
@@ -69,38 +66,15 @@ function ff(&$array){
     return $array;
 }
 
-?>
-
-
-<!--<ul class="nav nav-tabs">
-    <li ><a href="#index_src_Controller_Users.php-Users23" data-toggle="tab">Home</a></li>
-    <li ><a href="#profile" data-toggle="tab">Profile</a></li>
-    <li><a href="#messages" data-toggle="tab">Messages</a></li>
-    <li><a href="#settings" data-toggle="tab">Settings</a></li>
-</ul>
-
-<div class="tab-content">
-    <div class="tab-pane" id="index_src_Controller_Users.php-Users23">home</div>
-    <div class="tab-pane" id="profile">profile</div>
-    <div class="tab-pane" id="messages">messages</div>
-    <div class="tab-pane" id="settings">settings</div>
-</div>-->
-
-<?php
-
-echo $menuHTML.$dataHTML;
-?>
-
-<script>
+$script = "<script>
 
     $(document).ready(function() {
 
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('a[data-toggle=\"tab\"]').on('shown.bs.tab', function (e) {
             $(e.target).parent().removeClass('active'); // newly activated tab
-            //e.relatedTarget) // previous active tab
-        })
+        });
 
-        $(".bs-docs-sidebar").metisMenu({
+        $(\".bs-docs-sidebar\").metisMenu({
             // auto collapse.
             toggle: true,
             // prevents or allows dropdowns' onclick events after expanding/collapsing.
@@ -113,14 +87,14 @@ echo $menuHTML.$dataHTML;
             onTransitionStart: false,
             onTransitionEnd: false
         });
-
-        $('[data-spy="scroll"]').each(function () {
-            var $spy = $(this).scrollspy('refresh');
-        });
-        $(document).on('activate.bs.scrollspy', function () {
-            console.log($('.collapse.in').parent().find('a').attr('href'));
-            $('.collapse.in').parent().removeClass('active');
-        });
     });
-</script>
+</script>";
+
+echo __DIR__.'/test.php';
+if(file_put_contents(__DIR__.'/docs/test.php', $menuHTML.$dataHTML.$script)){
+    echo 'Файл создан';
+}
+?>
+
+
 
