@@ -134,7 +134,7 @@ class SQL extends Connect{
     }
 
     private static function db_prifix (){
-        return Info::get_db('DB_PRIFIX', self::$DB_ADAPTER) ?? '';
+        return Info::get_db('DB_PRIFIX', self::$DB_ADAPTER) ?: '';
     }
 
     //Использует приватный  set_database

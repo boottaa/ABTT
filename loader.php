@@ -1,6 +1,11 @@
 <?php
 
 //echo '<h3>Подключаемые файлы: </h3>';
+
+if (file_exists('vendor/autoload.php')) {
+    $loader = include 'vendor/autoload.php';
+}
+
 function autoload($class) {
 
     $dir   = dirname(__FILE__);

@@ -9,9 +9,9 @@
 return [
     'base' => [
         //домен.
-        'site' => "http://ex.dev",
+        'site' => "http://abtt.dev",
         //Корневая дериктория веб приложения.
-        'root_dir' => '/www',
+        'root_dir' => '/var/www/zf',
         //Шаблон по умолчанию
         'template' => 'default',
         //Режим разработчика
@@ -34,7 +34,8 @@ return [
             'DB_NAME'   => [
                 'default',
                 'new_q',
-                'docs'
+                'docs',
+                'TEST',
             ],
         ],
         'test' => [

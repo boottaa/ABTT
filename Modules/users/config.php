@@ -6,8 +6,8 @@
  * Time: 11:21
  */
 
-Template::$tmp = true;
-Template::$title = 'Hello w';
+/*Template::$tmp = true;
+Template::$title = 'Hello w';*/
 Template::addStyle('bootstrap.min.css');
 Template::addStyle('bootstrap.css');
 
